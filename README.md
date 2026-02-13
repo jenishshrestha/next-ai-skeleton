@@ -109,6 +109,7 @@ The skeleton includes a built-in technical handbook at `/docs`, powered by the l
 
 - **[Architecture: Deep Isolation](file:///Users/jenishshrestha/Projects/personal/next-ai-skeleton/src/features/docs/content/architecture.md)**
 - **[DX Standards: Performance First](file:///Users/jenishshrestha/Projects/personal/next-ai-skeleton/src/features/docs/content/dx-standards.md)**
+- **[Deployment & Dockerization: Optimized Deployment](file:///Users/jenishshrestha/Projects/personal/next-ai-skeleton/src/features/docs/content/deployment.md)**
 - **[Data Access Layer: Usage Guide](file:///Users/jenishshrestha/Projects/personal/next-ai-skeleton/src/dal/README.md)**
 
 ---
