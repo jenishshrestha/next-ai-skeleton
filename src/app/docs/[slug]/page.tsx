@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getDocBySlug } from '@/features/docs/api/get-doc';
+import { getDocBySlug, getAllDocs } from '@/features/docs/api/get-doc';
 import { Metadata } from 'next';
 
 interface PageProps {
@@ -14,6 +14,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: doc ? `${doc.title} | next-ai-skeleton` : 'Docs',
   };
 }
+
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
 
 export default async function DocDetailPage({ params }: PageProps) {
   const { slug } = await params;
@@ -44,20 +48,17 @@ export default async function DocDetailPage({ params }: PageProps) {
       </header>
 
       <div className="prose prose-zinc dark:prose-invert max-w-none">
-        <div className="text-foreground text-lg leading-relaxed font-normal whitespace-pre-wrap">
+        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
           {doc.content}
-        </div>
+        </ReactMarkdown>
       </div>
     </article>
   );
 }
 
 export async function generateStaticParams() {
-  // Hardcoded for now until we have a proper getAllDocs in the API
-  return [
-    { slug: 'architecture' },
-    { slug: 'ai-strategy' },
-    { slug: 'sample-app' },
-    { slug: 'dx-standards' },
-  ];
+  const docs = await getAllDocs();
+  return docs.map((doc) => ({
+    slug: doc.slug,
+  }));
 }

@@ -1,13 +1,13 @@
 ---
-title: Deployment & Dockerization
-description: Professional deployment strategies using multi-stage, Bun-native Docker builds.
-date: 2026-02-13
-author: Antigravity
+title: '⚓️ Deployment & Dockerization'
+description: 'Professional deployment strategies using multi-stage, Bun-native Docker builds.'
+date: '2026-02-13'
+author: 'Next AI Skeleton'
 ---
 
-# Deployment & Dockerization
+## Overview
 
-The **next-ai-skeleton** is designed to be cloud-agnostic and ultra-performant in production. We leverage **Docker** with a multi-stage, Bun-native build process to ensure that yours images are lean, secure, and blazing fast.
+The **next-ai-skeleton** is designed to be cloud-agnostic and ultra-performant. We leverage **Docker** with a multi-stage, Bun-native build process to ensure that your images are lean, secure, and blazing fast.
 
 ## ⚓️ Elite Docker Strategy
 

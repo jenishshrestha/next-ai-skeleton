@@ -1,37 +1,51 @@
 ---
-title: '🏗️ Architecture: The Deep Feature Isolation Manifesto'
-description: 'Why we abandoned flat structures for a robust, self-contained ecosystem that scales infinitely.'
-date: '2026-02-12'
-author: 'Lead Architect'
+title: '🏗️ Architecture: Feature-Driven Design'
+description: 'Deep-dive into the FDD methodology and folder isolation rules.'
+date: '2026-02-13'
+author: 'Next AI Skeleton'
 ---
 
-## The Evolution of Scale
+## Feature-Driven Design (FDD)
 
-In the early days of React, "separation of concerns" often meant splitting files by their technical type: `components/`, `hooks/`, `services/`. As applications grew, this led to **"The Spaghetti Migration"**—where developers jumped across dozens of folders to implement a single logical feature.
+This project follows a strict **Feature-Driven Design** pattern. Instead of organizing by technical type (e.g., all components in one folder), we organize by **Domain**.
 
-**Next AI Skeleton** solves this by enforcing **Deep Feature Isolation**.
+### Core Constraints
 
-### 🧬 The Anatomy of a Feature
+1.  **Deep Isolation**: Features should be self-contained. A feature should rarely import from another feature.
+2.  **Shared vs. Feature**: Components used by multiple features live in `src/shared`. If it's specific to a domain, it stays in `src/features/[name]`.
+3.  **App Router as Glue**: `src/app` only handles routing and layout. It imports features and shared components to compose pages.
 
-Every feature in this repository is treated as a self-contained "mini-app". This isn't just about folder organization; it's about **cognitive locality**.
+---
 
-- **`api/`**: The communication layer. Server Actions and fetchers live here, abstracted away from the UI.
-- **`components/`**: The visual layer. High-fidelity React components that consume the API and hooks.
-- **`hooks/`**: The state & side-effect layer. Any complex logic that isn't purely visual or purely data-fetching.
-- **`types/`**: The contract layer. TypeScript interfaces that define the domain entity.
-- **`config/`**: The governance layer. Constants, feature flags, and validation schemas.
+## Directory Structure
 
-### 🛡️ Why We Enforce Subfolders
+| Path            | Level       | Purpose                                             |
+| :-------------- | :---------- | :-------------------------------------------------- |
+| `.agent/`       | **System**  | AI Skills, Workflows, and Custom Instructions       |
+| `src/app/`      | **Routing** | App Router pages, layouts, and global providers     |
+| `src/features/` | **Domain**  | Isolated business logic, components, and API routes |
+| `src/shared/`   | **Shared**  | Global UI, Libs, Types, and Utils                   |
+| `src/dal/`      | **System**  | Data Access Layer (Client & Server actions)         |
 
-You might ask: _"Is this too much for a small feature?"_
+---
 
-The answer is **predictability**. By enforcing technical subfolders even for simple features, we remove the "choice" of where code should live. Both a human developer and an AI Agent can instantly understand where the business logic resides without scanning a messy root directory.
+## Feature Anatomy
 
-### 🚀 SOLID at its Core
+Every folder inside `src/features/` should follow this standard structure:
 
-Our architecture isn't just a folder list; it's a direct application of SOLID principles:
+```text
+src/features/[feature-name]/
+├── api/          # Feature-specific API endpoints & actions
+├── components/   # Feature-specific UI components
+├── types/        # Feature-specific TypeScript interfaces
+├── lib/          # Feature-specific utilities/helpers
+└── index.ts      # Public API for the feature
+```
 
-- **SRP (Single Responsibility)**: Each subfolder has one clear purpose.
-- **DIP (Dependency Inversion)**: Components depend on abstractions in `types/` and `api/`, never on implementation details.
+---
 
-This is how we build software that lasts.
+## The Rule of "Zero Leakage"
+
+- **Incorrect**: `import { Button } from '@/features/auth/components/button'`
+- **Correct**: `import { Button } from '@/shared/components/ui/button'`
+- **Correctish**: `import { AuthForm } from '@/features/auth'` (only via index.ts)
