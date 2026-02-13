@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "organization": "Antigravity",
+  "date": "February 2026",
+  "abstract": "Persona and standards for performing high-quality code reviews as a Senior Frontend Lead. Focuses on performance, modularity (FDD), consistency, and scalability.",
+  "references": [
+    "https://google.github.io/eng-practices/review/reviewer/looking-for.html",
+    "https://vercel.com/blog/how-we-optimized-package-imports-in-next-js"
+  ]
+}

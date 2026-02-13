@@ -1,0 +1,23 @@
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+# Whitelist main, master, dev, staging
+valid_pattern="^(main|master|dev|staging|feature\/|fix\/|hotfix\/|refactor\/|docs\/|chore\/|test\/)"
+
+# Check if this is a branch switch (flag 1)
+if [ "$3" = "1" ]; then
+  if ! echo "$current_branch" | grep -Eq "$valid_pattern"; then
+    echo "\n\033[1;31m❌ Error: Non-standard branch name: '$current_branch'\033[0m"
+    echo "\033[0;31mGit policy requires professional prefixes: feature/, fix/, hotfix/, refactor/, docs/, chore/, test/\033[0m"
+    echo "\033[0;32m💡 Example: feature/$current_branch or fix/$current_branch\033[0m"
+    
+    echo "\033[1;33m🔄 Self-rectifying: Reverting checkout and deleting invalid branch...\033[0m\n"
+    
+    # Prevent infinite loop by checking if we are already trying to switch back
+    # (Though in this case, the previous branch must be valid for it to stop)
+    
+    # Switch back to the previous branch
+    git checkout - > /dev/null 2>&1
+    
+    # Delete the offending branch
+    git branch -D "$current_branch" > /dev/null 2>&1
+  fi
+fi

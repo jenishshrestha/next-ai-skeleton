@@ -1,0 +1,5 @@
+# Run lint-staged (handles formatting and linting on staged files only)
+bun run lint-staged
+
+# Type check (fast, catches type errors early)
+bun run typecheck

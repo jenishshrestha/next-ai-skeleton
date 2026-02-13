@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "organization": "Antigravity",
+  "date": "February 2026",
+  "abstract": "Architectural standards for organizing Next.js applications using Feature-Driven Design (FDD). Ensures code locality, encapsulation, and modular scalability.",
+  "references": [
+    "https://feature-sliced.design/docs/get-started/tutorial",
+    "https://nextjs.org/docs/app/building-your-application/routing/colocation"
+  ]
+}

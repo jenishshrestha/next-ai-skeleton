@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "organization": "Antigravity",
+  "date": "February 2026",
+  "abstract": "Global standards for writing high-performance, type-safe unit tests using Bun. Enforces strict typing and zero-tolerance for 'any'.",
+  "references": [
+    "https://bun.sh/docs/test/utils",
+    "https://bun.sh/docs/test/mocks"
+  ]
+}

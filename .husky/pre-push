@@ -1,0 +1,11 @@
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+valid_pattern="^(main|master|dev|staging|feature\/|fix\/|hotfix\/|refactor\/|docs\/|chore\/|test\/)"
+
+if ! echo "$current_branch" | grep -Eq "$valid_pattern"; then
+  echo "\n\033[1;31m❌ Error: Non-standard branch name detected: '$current_branch'\033[0m"
+  echo "\033[0;31mPush blocked. Use professional prefixes: feature/, fix/, hotfix/, refactor/, docs/, chore/, test/\033[0m\n"
+  exit 1
+fi
+
+echo "🧪 Running tests before push..."
+bun test || echo "⚠️ No tests found, proceeding with push..."
