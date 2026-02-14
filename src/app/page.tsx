@@ -9,10 +9,10 @@ export default function Home() {
         <div className="bg-primary/10 absolute -top-40 -z-10 h-[500px] w-[500px] animate-pulse rounded-full blur-[120px]" />
 
         <div className="space-y-6">
-          <div className="border-primary/20 bg-primary/10 text-primary inline-flex items-center rounded-full border px-4 py-1.5 text-xs font-semibold backdrop-blur-sm">
+          <div className="inline-flex items-center rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold text-emerald-600 backdrop-blur-sm dark:text-emerald-400">
             <span className="relative flex h-2 w-2">
-              <span className="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
-              <span className="bg-primary relative inline-flex h-2 w-2 rounded-full"></span>
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
             </span>
             <span className="ml-2">v1.0.0 is Live</span>
           </div>
