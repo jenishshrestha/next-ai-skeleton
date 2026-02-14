@@ -1,51 +1,58 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
+import { siteConfig } from './site';
 
-export const SEO_CONFIG = {
+export const defaultMetadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: 'next-ai-skeleton | AI-Ready Next.js Template',
-    template: '%s | next-ai-skeleton',
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
-  description: 'A professional, AI-ready Next.js skeleton designed for speed and scalability.',
-  keywords: ['nextjs', 'react', 'typescript', 'ai', 'skeleton', 'template', 'fdd'],
-  authors: [{ name: 'jenish' }],
-  creator: 'jenish',
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [
+    {
+      name: siteConfig.author.name,
+      url: siteConfig.author.url,
+    },
+  ],
+  creator: siteConfig.author.name,
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://next-ai-skeleton.vercel.app',
-    siteName: 'next-ai-skeleton',
-    title: 'next-ai-skeleton | AI-Ready Next.js Template',
-    description: 'A professional, AI-ready Next.js skeleton designed for speed and scalability.',
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
     images: [
       {
-        url: 'https://next-ai-skeleton.vercel.app/og-image.png',
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: 'next-ai-skeleton',
+        alt: siteConfig.name,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'next-ai-skeleton | AI-Ready Next.js Template',
-    description: 'A professional, AI-ready Next.js skeleton designed for speed and scalability.',
-    images: ['https://next-ai-skeleton.vercel.app/og-image.png'],
-    creator: '@jenishhrestha.31',
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+    creator: '@jenishshrestha',
+  },
+  icons: {
+    icon: '/icon',
+    // shortcut: '/favicon.ico', // Optional: Add if you have a legacy favicon
+    // apple: '/apple-touch-icon.png', // Optional: Add for iOS
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
-};
-
-export const defaultMetadata: Metadata = {
-  title: SEO_CONFIG.title,
-  description: SEO_CONFIG.description,
-  keywords: SEO_CONFIG.keywords,
-  authors: SEO_CONFIG.authors,
-  creator: SEO_CONFIG.creator,
-  openGraph: SEO_CONFIG.openGraph,
-  twitter: SEO_CONFIG.twitter,
-  robots: SEO_CONFIG.robots,
-  metadataBase: new URL(SEO_CONFIG.openGraph.url),
 };

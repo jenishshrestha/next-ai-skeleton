@@ -1,23 +1,23 @@
 import { MetadataRoute } from 'next';
-import { SEO_CONFIG } from '@/shared/config/seo';
+import { siteConfig } from '@/shared/config/site';
+import { getAllDocs } from '@/features/docs/api/get-doc';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = SEO_CONFIG.openGraph.url;
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const docs = await getAllDocs();
 
-  // In a real app, you would fetch your dynamic routes (e.g., blog posts) here
-  // and map them into the sitemap array.
+  const docRoutes = docs.map((doc) => ({
+    url: `${siteConfig.url}/docs/${doc.slug}`,
+    lastModified: new Date(doc.date),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 1,
-    },
-    // Example dynamic route:
-    // ...posts.map(post => ({
-    //   url: `${baseUrl}/blog/${post.slug}`,
-    //   lastModified: post.updatedAt,
-    // }))
-  ];
+  const routes = ['', '/login', '/forgot-password', '/docs'].map((route) => ({
+    url: `${siteConfig.url}${route}`,
+    lastModified: new Date(),
+    changeFrequency: 'daily' as const,
+    priority: 1,
+  }));
+
+  return [...routes, ...docRoutes];
 }

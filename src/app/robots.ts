@@ -1,13 +1,13 @@
 import { MetadataRoute } from 'next';
-import { SEO_CONFIG } from '@/shared/config/seo';
+import { siteConfig } from '@/shared/config/site';
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/private/',
+      disallow: ['/api/', '/_next/'],
     },
-    sitemap: `${SEO_CONFIG.openGraph.url}/sitemap.xml`,
+    sitemap: `${siteConfig.url}/sitemap.xml`,
   };
 }
