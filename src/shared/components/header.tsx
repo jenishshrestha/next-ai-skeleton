@@ -17,6 +17,14 @@ export function Header() {
             size="sm"
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
+            <Link href="/login">Login</Link>
+          </Button>
+          <Button
+            asChild
+            variant="ghost"
+            size="sm"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
             <Link href="/docs">Docs</Link>
           </Button>
           <Button
