@@ -9,7 +9,7 @@ export function DocsNavigation() {
   const pathname = usePathname();
 
   const links = [
-    { title: 'Overview', href: '/docs' },
+    { title: 'Getting Started', href: '/docs/getting-started' },
     { title: 'Architecture (FDD)', href: '/docs/architecture' },
     { title: 'Engineering Standards', href: '/docs/engineering-standards' },
     { title: 'API Communication (DAL)', href: '/docs/dal' },
