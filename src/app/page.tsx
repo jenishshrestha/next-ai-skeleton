@@ -3,7 +3,7 @@ import { Button } from '@/shared/components/ui/button';
 
 export default function Home() {
   return (
-    <div className="flex min-h-[calc(100vh-8rem)] flex-col items-center justify-center bg-zinc-50 px-4 py-12 dark:bg-zinc-950">
+    <div className="flex h-full flex-col items-center justify-center bg-zinc-50 px-4 py-12 dark:bg-zinc-950">
       <main className="relative flex w-full max-w-6xl flex-col items-center justify-center text-center">
         {/* Animated Glow Effect */}
         <div className="bg-primary/10 absolute -top-40 -z-10 h-[500px] w-[500px] animate-pulse rounded-full blur-[120px]" />

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
 import { getAllDocs } from '@/features/docs/api/get-doc';
 import {
   Card,
@@ -7,6 +8,11 @@ import {
   CardTitle,
   CardDescription,
 } from '@/shared/components/ui/card';
+
+export const metadata: Metadata = {
+  title: 'Documentation',
+  description: 'Technical handbook and standards for next-ai-skeleton.',
+};
 
 export default async function DocsPage() {
   const docs = await getAllDocs();
