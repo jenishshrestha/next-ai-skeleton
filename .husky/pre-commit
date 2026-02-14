@@ -1,3 +1,15 @@
+echo "🔍 Validating branch name..."
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Block pushes from main/master/dev directly. Only allow feature/fix/refactor/etc.
+valid_pattern="^(feature\/|fix\/|hotfix\/|refactor\/|docs\/|chore\/|test\/)"
+
+if ! echo "$current_branch" | grep -Eq "$valid_pattern"; then
+  echo "\n\033[1;31m❌ Error: You are trying to commit from '$current_branch'\033[0m"
+  echo "\033[0;31mYou must use a feature branch (e.g., feature/my-feature).\033[0m\n"
+  exit 1
+fi
+
 # Run lint-staged (handles formatting and linting on staged files only)
 bun run lint-staged
 
