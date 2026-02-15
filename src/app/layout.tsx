@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import { defaultMetadata } from '@/shared/config/seo';
 import { siteConfig } from '@/shared/config/site';
+import { Toaster } from '@/shared/components/ui/sonner';
 import './globals.css';
 
 const geistSans = Geist({
@@ -14,9 +15,6 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = defaultMetadata;
-
-import { Header } from '@/shared/components/header';
-import { Footer } from '@/shared/components/footer';
 
 export default function RootLayout({
   children,
@@ -34,16 +32,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} grid min-h-screen grid-rows-[auto_1fr_auto] antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Header />
-        <main id="main-content">{children}</main>
-        <Footer />
+        {children}
+        <Toaster richColors />
       </body>
     </html>
   );
