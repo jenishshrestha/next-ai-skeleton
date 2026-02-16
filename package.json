@@ -34,6 +34,7 @@
     "@marsidev/react-turnstile": "^1.4.2",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-slot": "^1.2.4",
+    "@t3-oss/env-nextjs": "^0.13.10",
     "@tailwindcss/typography": "^0.5.19",
     "axios": "^1.13.5",
     "better-auth": "^1.4.18",

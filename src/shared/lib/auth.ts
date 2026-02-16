@@ -1,3 +1,4 @@
+import { env } from '@/shared/lib/env';
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { captcha, lastLoginMethod } from 'better-auth/plugins';
@@ -9,7 +10,7 @@ export const auth = betterAuth({
     provider: 'pg',
     schema: schema,
   }),
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL: env.BETTER_AUTH_URL,
   emailAndPassword: {
     enabled: true,
   },
@@ -18,8 +19,8 @@ export const auth = betterAuth({
   },
   socialProviders: {
     github: {
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+      clientId: env.GITHUB_CLIENT_ID,
+      clientSecret: env.GITHUB_CLIENT_SECRET,
     },
   },
   user: {
@@ -38,7 +39,7 @@ export const auth = betterAuth({
   plugins: [
     captcha({
       provider: 'cloudflare-turnstile',
-      secretKey: process.env.CAPTCHA_SECRET_KEY as string,
+      secretKey: env.CAPTCHA_SECRET_KEY,
     }),
     lastLoginMethod({
       storeInDatabase: true,
