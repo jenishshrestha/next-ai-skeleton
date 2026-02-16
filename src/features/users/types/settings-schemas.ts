@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { authClient } from '@/shared/lib/auth-client';
 
 // Profile Update Schema
 export const profileSchema = z.object({
@@ -20,3 +21,7 @@ export const changePasswordSchema = z
   });
 
 export type ChangePasswordFormValues = z.infer<typeof changePasswordSchema>;
+
+export interface SettingsFormProps {
+  initialSession?: typeof authClient.$Infer.Session;
+}

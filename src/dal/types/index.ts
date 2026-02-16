@@ -1,3 +1,5 @@
+import type { z } from 'zod';
+
 export enum RequestMethod {
   GET = 'GET',
   POST = 'POST',
@@ -25,7 +27,7 @@ export interface ApiValidationError {
 
 // ─── Request Options ─────────────────────────────────────────────────────────
 
-export interface ApiRequestOptions<TBody = Record<string, unknown>> {
+export interface ApiRequestOptions<TBody = Record<string, unknown>, TData = unknown> {
   /** Request body payload — typed per call site */
   requestData?: TBody;
   /** Path variables for URL interpolation (e.g. {id}) */
@@ -36,6 +38,8 @@ export interface ApiRequestOptions<TBody = Record<string, unknown>> {
   headers?: Record<string, string>;
   /** Override default response type (e.g. 'blob' for file downloads) */
   responseType?: 'json' | 'blob' | 'arraybuffer' | 'text';
+  /** Optional Zod schema to validate the response data */
+  responseSchema?: z.ZodType<TData>;
 }
 
 // ─── Response Shapes ─────────────────────────────────────────────────────────

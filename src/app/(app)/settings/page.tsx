@@ -2,6 +2,7 @@ import { SettingsForm, ChangePasswordForm } from '@/features/users';
 import { SettingsStats } from '@/features/users/components/settings-stats';
 import { Separator } from '@/shared/components/ui/separator';
 import { getServerSession } from '@/shared/lib/dal/session';
+import { PageHeader } from '@/shared/components/layouts/page-header';
 import { redirect } from 'next/navigation';
 
 export default async function SettingsPage() {
@@ -17,10 +18,12 @@ export default async function SettingsPage() {
 
   return (
     <div className="space-y-2">
-      <div>
-        <h2 className="text-3xl font-bold tracking-tight">Settings</h2>
-        <p className="text-muted-foreground">Manage your account settings and preferences.</p>
-      </div>
+      <PageHeader>
+        <PageHeader.Title>Settings</PageHeader.Title>
+        <PageHeader.Description>
+          Manage your account settings and preferences.
+        </PageHeader.Description>
+      </PageHeader>
 
       <div className="space-y-8 pt-4">
         <SettingsForm initialSession={session} />

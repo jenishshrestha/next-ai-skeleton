@@ -17,7 +17,8 @@
     "test:watch": "bun test --watch",
     "preinstall": "npx only-allow bun",
     "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "bun src/shared/lib/db/seed.ts"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
@@ -44,6 +45,7 @@
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.564.0",
     "next": "16.1.6",
+    "next-safe-action": "^8.0.11",
     "next-themes": "^0.4.6",
     "pg": "^8.18.0",
     "radar": "^0.43.1",

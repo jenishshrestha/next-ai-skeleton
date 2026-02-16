@@ -1,26 +1,6 @@
 'use client';
 
 import { authClient } from '@/shared/lib/auth-client';
-import { Skeleton } from '@/shared/components/ui/skeleton';
-
-export function SettingsStatsSkeleton() {
-  return (
-    <div className="grid gap-6 md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-      <div className="space-y-1.5">
-        <Skeleton className="h-5 w-20" />
-        <Skeleton className="h-4 w-44" />
-      </div>
-      <div className="space-y-3">
-        {[1, 2].map((i) => (
-          <div key={i} className="flex justify-between">
-            <Skeleton className="h-4 w-24" />
-            <Skeleton className="h-4 w-32" />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 interface SettingsStatsProps {
   initialSession?: typeof authClient.$Infer.Session;

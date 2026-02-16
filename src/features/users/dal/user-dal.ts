@@ -1,7 +1,10 @@
 import { db } from '@/shared/lib/db';
 import { user } from '@/shared/lib/db-schema';
 import { dbAction } from '@/dal';
-import { eq, sql } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
+import { auth } from '@/shared/lib/auth';
+import { headers } from 'next/headers';
+import { type ChangePasswordFormValues } from '../types/settings-schemas';
 
 /**
  * User Data Access Layer
@@ -22,17 +25,38 @@ export const UserDAL = {
     ),
 
   /**
-   * Get basic stats for the dashboard (Example)
+   * Update user profile
+   * Utilizes dbAction for consistent error handling and revalidation.
    */
-  getDashboardStats: () =>
+  updateProfile: (id: string, name: string) =>
     dbAction(
       async () => {
-        const [userCount] = await db.select({ count: sql<number>`count(*)` }).from(user);
-        return {
-          totalUsers: Number(userCount?.count || 0),
-          activeSessions: 0, // Placeholder
-        };
+        const [updated] = await db
+          .update(user)
+          .set({ name, updatedAt: new Date() })
+          .where(eq(user.id, id))
+          .returning();
+        return updated;
       },
-      { errorMessage: 'Failed to fetch dashboard stats' },
+      { revalidate: '/settings', errorMessage: 'Failed to update user profile in database' },
+    ),
+
+  /**
+   * Change user password
+   * Wraps Better Auth API in dbAction for consistent error handling and session context.
+   */
+  changePassword: (data: ChangePasswordFormValues) =>
+    dbAction(
+      async () => {
+        const response = await auth.api.changePassword({
+          headers: await headers(),
+          body: {
+            currentPassword: data.currentPassword,
+            newPassword: data.newPassword,
+          },
+        });
+        return response;
+      },
+      { errorMessage: 'Failed to change password' },
     ),
 };
