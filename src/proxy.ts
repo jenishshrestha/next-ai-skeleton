@@ -1,8 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
 export function proxy(request: NextRequest) {
-  // Better Auth session cookie name defaults to "better-auth.session_token"
-  // but we customized it to "next-ai-skeleton.session_token"
   const sessionCookie = request.cookies.get('next-ai-skeleton.session_token');
 
   const isAuthPage =

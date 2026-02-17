@@ -1,10 +1,10 @@
 import { createAuthClient } from 'better-auth/react';
-import { lastLoginMethod } from 'better-auth/plugins';
+import { lastLoginMethodClient } from 'better-auth/client/plugins';
 import { env } from '@/shared/lib/env';
 
 export const authClient = createAuthClient({
-  baseURL: env.NEXT_PUBLIC_BETTER_AUTH_URL, // the base url of your auth server
-  plugins: [lastLoginMethod()],
+  baseURL: env.NEXT_PUBLIC_BETTER_AUTH_URL,
+  plugins: [lastLoginMethodClient()],
 });
 
 export const { signIn, signUp, useSession } = authClient;

@@ -1,8 +1,8 @@
 'use server';
 
 import { authActionClient } from '@/shared/lib/safe-action';
-import { profileSchema, changePasswordSchema } from './types/settings-schemas';
-import { UserDAL } from './dal/user-dal';
+import { profileSchema, changePasswordSchema } from '../types/settings-schemas';
+import { UserDAL } from './user-dal';
 
 /**
  * Update Profile Action

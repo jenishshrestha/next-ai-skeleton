@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAction } from 'next-safe-action/hooks';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
@@ -20,7 +19,6 @@ import { Form } from '@/shared/components/form/form';
 import { authClient } from '@/shared/lib/auth-client';
 import { getInitials } from '@/shared/lib/utils';
 
-import { updateProfileAction } from '../actions';
 import {
   profileSchema,
   type ProfileFormValues,
@@ -30,6 +28,7 @@ import {
 export function SettingsForm({ initialSession }: SettingsFormProps) {
   const { data: session } = authClient.useSession();
   const currentSession = session || initialSession;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
@@ -39,26 +38,17 @@ export function SettingsForm({ initialSession }: SettingsFormProps) {
     },
   });
 
-  const { execute, isExecuting } = useAction(updateProfileAction, {
-    onSuccess: () => {
+  const onSubmit = async (data: ProfileFormValues) => {
+    setIsSubmitting(true);
+    try {
+      await authClient.updateUser({ name: data.name });
+      form.reset({ name: data.name });
       toast.success('Profile updated successfully');
-    },
-    onError: ({ error }) => {
-      toast.error(
-        typeof error.serverError === 'string' ? error.serverError : 'Failed to update profile',
-      );
-    },
-  });
-
-  // Sync session data into form once loaded
-  useEffect(() => {
-    if (session?.user?.name) {
-      form.reset({ name: session.user.name });
+    } catch {
+      toast.error('Failed to update profile');
+    } finally {
+      setIsSubmitting(false);
     }
-  }, [session?.user?.name, form]);
-
-  const onSubmit = (data: ProfileFormValues) => {
-    execute(data);
   };
 
   const isDirty = form.formState.isDirty;
@@ -98,8 +88,8 @@ export function SettingsForm({ initialSession }: SettingsFormProps) {
           </Field>
 
           <div>
-            <Button type="submit" disabled={!isDirty || isExecuting}>
-              {isExecuting ? 'Saving...' : 'Save Changes'}
+            <Button type="submit" disabled={!isDirty || isSubmitting}>
+              {isSubmitting ? 'Saving...' : 'Save Changes'}
             </Button>
           </div>
         </FieldGroup>

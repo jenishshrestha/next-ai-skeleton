@@ -10,7 +10,7 @@ import { FieldGroup } from '@/shared/components/ui/field';
 import { PasswordInput } from '@/shared/components/ui/password-input';
 
 import { Form } from '@/shared/components/form/form';
-import { changePasswordAction } from '../actions';
+import { changePasswordAction } from '../api/actions';
 import { changePasswordSchema, type ChangePasswordFormValues } from '../types/settings-schemas';
 
 export function ChangePasswordForm() {

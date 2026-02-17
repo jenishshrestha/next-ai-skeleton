@@ -23,14 +23,6 @@ export const auth = betterAuth({
       clientSecret: env.GITHUB_CLIENT_SECRET,
     },
   },
-  user: {
-    additionalFields: {
-      lastLoginMethod: {
-        type: 'string',
-        defaultValue: 'credentials',
-      },
-    },
-  },
   rateLimit: {
     enabled: true,
     window: 60,

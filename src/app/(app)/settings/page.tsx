@@ -14,7 +14,7 @@ export default async function SettingsPage() {
 
   const showPasswordSection =
     session.user &&
-    (!('lastLoginMethod' in session.user) || session.user.lastLoginMethod === 'credentials');
+    (!('lastLoginMethod' in session.user) || session.user.lastLoginMethod === 'email');
 
   return (
     <div className="space-y-2">
