@@ -28,7 +28,8 @@
       "@/hooks/*": ["./src/shared/hooks/*"],
       "@/lib/*": ["./src/shared/lib/*"],
       "@/types/*": ["./src/shared/types/*"],
-      "@/config/*": ["./src/shared/config/*"]
+      "@/config/*": ["./src/shared/config/*"],
+      "@tests/*": ["./tests/*"]
     }
   },
   "include": [

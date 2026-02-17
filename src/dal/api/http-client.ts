@@ -1,11 +1,12 @@
-import Axios from 'axios';
+import axios from 'axios';
 
 import type { ApiEndpoint, ApiRequestOptions } from '../types';
+import { env } from '@/shared/lib/env';
 
 // ─── Axios Instance ──────────────────────────────────────────────────────────
 
-const httpClient = Axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL ?? '',
+export const httpClient = axios.create({
+  baseURL: env.NEXT_PUBLIC_API_URL,
   timeout: 30_000, // 30 seconds
   headers: { 'Content-Type': 'application/json' },
 });

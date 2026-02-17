@@ -3,6 +3,7 @@
 import { GithubIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Logo } from '@/shared/components/logo';
 
 import {
   NavigationMenu,
@@ -24,9 +25,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur-md dark:bg-zinc-900/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
-        <Link href="/" className="transition-opacity hover:opacity-80">
-          <p className="text-xl font-black tracking-tighter">next-ai-skeleton</p>
-        </Link>
+        <Logo textClassName="text-xl font-black tracking-tighter" />
 
         <NavigationMenu>
           <NavigationMenuList>
