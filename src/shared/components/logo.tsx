@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Sparkles } from 'lucide-react';
+import Image from 'next/image';
 import { cn } from '@/shared/lib/utils';
 
 interface LogoProps {
@@ -21,10 +21,16 @@ export function Logo({ className, iconClassName, textClassName, href = '/' }: Lo
           iconClassName,
         )}
       >
-        <Sparkles className="h-4 w-4" />
+        <Image
+          src="/images/lyre-logo.svg"
+          alt="Lyre Logo"
+          width={16}
+          height={16}
+          className="invert dark:invert-0"
+        />
       </div>
       <span className={cn('truncate group-data-[state=collapsed]:hidden', textClassName)}>
-        Next AI Skeleton
+        Lyre
       </span>
     </Link>
   );

@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
 export function proxy(request: NextRequest) {
-  const sessionCookie = request.cookies.get('next-ai-skeleton.session_token');
+  const sessionCookie = request.cookies.get('lyre.session_token');
 
   const isAuthPage =
     request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/signup');

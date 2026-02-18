@@ -2,7 +2,7 @@
 title: '⚖️ Engineering Standards'
 description: 'The core technical rules and quality standards that govern the development of this skeleton.'
 date: '2026-02-13'
-author: 'Next AI Skeleton'
+author: 'Ventus'
 ---
 
 ## Overview

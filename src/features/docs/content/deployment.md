@@ -2,12 +2,12 @@
 title: '⚓️ Deployment & Dockerization'
 description: 'Professional deployment strategies using multi-stage, Bun-native Docker builds.'
 date: '2026-02-13'
-author: 'Next AI Skeleton'
+author: 'Ventus'
 ---
 
 ## Overview
 
-The **next-ai-skeleton** is designed to be cloud-agnostic and ultra-performant. We leverage **Docker** with a multi-stage, Bun-native build process to ensure that your images are lean, secure, and blazing fast.
+The **ventus** is designed to be cloud-agnostic and ultra-performant. We leverage **Docker** with a multi-stage, Bun-native build process to ensure that your images are lean, secure, and blazing fast.
 
 ## ⚓️ Elite Docker Strategy
 
@@ -60,4 +60,4 @@ Because of the Dockerized nature of the skeleton, you can deploy it to:
 
 ---
 
-© 2026 next-ai-skeleton. Managed by **Jenish Shrestha**.
+© 2026 ventus. Managed by **Jenish Shrestha**.

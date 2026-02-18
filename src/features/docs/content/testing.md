@@ -2,7 +2,7 @@
 title: '🧪 Testing Strategy'
 description: 'How to write and run high-performance unit tests using the Bun-native runner.'
 date: '2026-02-13'
-author: 'Next AI Skeleton'
+author: 'Ventus'
 ---
 
 ## Overview

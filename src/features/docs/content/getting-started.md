@@ -1,11 +1,11 @@
 ---
 title: '🚀 Getting Started'
-description: 'Complete guide to setting up and developing with the next-ai-skeleton.'
+description: 'Complete guide to setting up and developing with the ventus.'
 date: '2026-02-14'
-author: 'Next AI Skeleton'
+author: 'Ventus'
 ---
 
-**next-ai-skeleton** is more than just a boilerplate. It's a production-ready foundation built on the principles of **Deep Feature Isolation** and **Modern DX**. It provides a robust technical handbook, standardized AI instructions, and a lightning-fast Bun-native workflow to help you go from idea to deployment with zero technical debt.
+**ventus** is more than just a boilerplate. It's a production-ready foundation built on the principles of **Deep Feature Isolation** and **Modern DX**. It provides a robust technical handbook, standardized AI instructions, and a lightning-fast Bun-native workflow to help you go from idea to deployment with zero technical debt.
 
 ### Key Pillars
 
@@ -69,8 +69,8 @@ The project follows a strict **Feature-Driven Design (FDD)** with **Deep Isolati
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/jenishshrestha/next-ai-skeleton.git
-   cd next-ai-skeleton
+   git clone https://github.com/jenishshrestha/ventus.git
+   cd ventus
    ```
 
 2. Install dependencies:

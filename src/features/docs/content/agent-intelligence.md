@@ -2,7 +2,7 @@
 title: '🧠 Agent Intelligence'
 description: 'How to use the Skill Vault and AI Workflows to train your AI agent.'
 date: '2026-02-13'
-author: 'Next AI Skeleton'
+author: 'Ventus'
 ---
 
 ## Overview

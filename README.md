@@ -1,4 +1,4 @@
-# 💀 next-ai-skeleton
+# 💀 next-ai-starter
 
 A premium, **Agent-Native** Next.js 16 skeleton designed for high-performance development, architectural clarity, and seamless AI collaboration.
 
@@ -6,7 +6,7 @@ A premium, **Agent-Native** Next.js 16 skeleton designed for high-performance de
 
 ## 🚀 Overview
 
-**next-ai-skeleton** is more than just a boilerplate. It's a production-ready foundation built on the principles of **Deep Feature Isolation** and **Modern DX**. It provides a robust technical handbook, standardized AI instructions, and a lightning-fast Bun-native workflow to help you go from idea to deployment with zero technical debt.
+**next-ai-starter** is more than just a boilerplate. It's a production-ready foundation built on the principles of **Deep Feature Isolation** and **Modern DX**. It provides a robust technical handbook, standardized AI instructions, and a lightning-fast Bun-native workflow to help you go from idea to deployment with zero technical debt.
 
 ### Key Pillars
 
@@ -70,8 +70,8 @@ The project follows a strict **Feature-Driven Design (FDD)** with **Deep Isolati
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/jenishshrestha/next-ai-skeleton.git
-   cd next-ai-skeleton
+   git clone https://github.com/jenishshrestha/next-ai-starter.git
+   cd next-ai-starter
    ```
 
 2. Install dependencies:
@@ -107,11 +107,11 @@ This project uses **Husky** to enforce "Zero-Tolerance" quality:
 
 The skeleton includes a built-in technical handbook at `/docs`, powered by the local CMS:
 
-- **[Architecture: Deep Isolation](file:///Users/jenishshrestha/Projects/personal/next-ai-skeleton/src/features/docs/content/architecture.md)**
-- **[DX Standards: Performance First](file:///Users/jenishshrestha/Projects/personal/next-ai-skeleton/src/features/docs/content/dx-standards.md)**
-- **[Deployment & Dockerization: Optimized Deployment](file:///Users/jenishshrestha/Projects/personal/next-ai-skeleton/src/features/docs/content/deployment.md)**
-- **[Data Access Layer: Usage Guide](file:///Users/jenishshrestha/Projects/personal/next-ai-skeleton/src/dal/README.md)**
+- **[Architecture: Deep Isolation](file:///Users/jenishshrestha/Projects/personal/next-ai-starter/src/features/docs/content/architecture.md)**
+- **[DX Standards: Performance First](file:///Users/jenishshrestha/Projects/personal/next-ai-starter/src/features/docs/content/dx-standards.md)**
+- **[Deployment & Dockerization: Optimized Deployment](file:///Users/jenishshrestha/Projects/personal/next-ai-starter/src/features/docs/content/deployment.md)**
+- **[Data Access Layer: Usage Guide](file:///Users/jenishshrestha/Projects/personal/next-ai-starter/src/dal/README.md)**
 
 ---
 
-© 2026 next-ai-skeleton. Engineered for the AI age by **Jenish Shrestha**.
+© 2026 next-ai-starter. Engineered for the AI age by **Jenish Shrestha**.

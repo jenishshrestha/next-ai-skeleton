@@ -1,6 +1,6 @@
-# Project Brief: Next-ai-skeleton 🌬️
+# Project Brief: Lyre 🌬️🎼
 
-**Next-ai-skeleton** is a premium, highly-opinionated Next.js production engine and starter kit. It is designed to bridge the gap between "bare-bones skeletons" and "bloated SaaS templates," focusing on architectural purity, developer experience (DX), and a "10/10" premium user interface.
+**Lyre** is a premium, highly-opinionated Next.js + AI Architecture stack. It is designed to bridge the gap between "bare-bones skeletons" and "bloated SaaS templates," focusing on architectural purity, developer experience (DX), and a "10/10" orchestrated engineering standard.
 
 ---
 
@@ -31,49 +31,48 @@ Code is organized by business feature rather than technical type. Each feature (
 
 ## 🛠️ Technology Stack
 
-| Layer              | Technology                                                        |
-| :----------------- | :---------------------------------------------------------------- |
-| **Framework**      | Next.js (App Router, React 19, Server Components)                 |
-| **Language**       | TypeScript (Strict Mode)                                          |
-| **Runtime / Test** | Bun (Runtime, Test runner, Package manager)                       |
-| **Database**       | PostgreSQL + Drizzle ORM                                          |
-| **Authentication** | Better Auth (Client/Server Plugin architecture)                   |
-| **Validation**     | Zod (Schema-first validation)                                     |
-| **Env Safety**     | @t3-oss/env-nextjs (Build-time validation)                        |
-| **Actions**        | next-safe-action (Type-safe, middleware-ready)                    |
-| **Style**          | Vanilla CSS + Tailwind-like utility classes (Radix UI influenced) |
-| **UX**             | Sonner (Toasts), Lucide (Icons), Framer-like micro-animations     |
+| Layer              | Technology                                                    |
+| :----------------- | :------------------------------------------------------------ |
+| **Framework**      | Next.js (App Router, React 19, Server Components)             |
+| **Language**       | TypeScript (Strict Mode)                                      |
+| **Runtime / Test** | Bun (Runtime, Test runner, Package manager)                   |
+| **Database**       | PostgreSQL + Drizzle ORM                                      |
+| **Authentication** | Better Auth (Client/Server Plugin architecture)               |
+| **Validation**     | Zod (Schema-first validation)                                 |
+| **Env Safety**     | @t3-oss/env-nextjs (Build-time validation)                    |
+| **Actions**        | next-safe-action (Type-safe, middleware-ready)                |
+| **Style**          | Tailwind CSS v4 + Radix UI                                    |
+| **UX**             | Sonner (Toasts), Lucide (Icons), Framer-like micro-animations |
 
 ---
 
 ## 🚀 Key Features
 
-- **Advanced Auth System**:
+- **Finely Tuned Auth System**:
   - Email/Password & OAuth (GitHub) integration.
   - **"Last Used" Login Badge**: Smart UI that remembers the user's last login method.
   - **Security**: Built-in rate limiting and Captcha (Cloudflare Turnstile).
   - **Cookie Shield**: Custom proxy-based middleware for secure redirects and session handling.
-- **Premium User Settings**:
-  - Instant UI sync (no layout shifts) for profile updates.
-  - Server-side session pre-fetching for zero-flicker page loads.
-  - Intelligent form states (Save button enables/disables based on dirty state).
-- **Engineering Foundation**:
-  - Global standardized `apiAction` orchestrator for external APIs.
+- **Orchestrated Data Layer**:
+  - Standardized `apiAction` orchestrator for external APIs.
   - Seeding layer for "Golden Test Users" and reproducible development environments.
   - Standardized `PageHeader` and `Field` compound components.
+- **Premium UX**:
+  - Instant UI sync for profile updates.
+  - Server-side session pre-fetching for zero-flicker page loads.
 
 ---
 
-## 🎯 Target Brand Identity: "Next-ai-skeleton"
+## 🎯 Brand Identity: "Lyre"
 
-- **Meaning**: Inspired by "Ventus" (Wind/Air).
-- **Keywords**: Speed, Flow, Agility, Lightweight, Premium.
+- **Slogan**: "Orchestrate your vision. Harmonize your code."
+- **Meaning**: Inspired by the instrument of the wind. Representing speed, harmony, and finely tuned engineering.
 - **Vibe**: Futuristic, clean, and extremely fast.
 
 ---
 
 ## ✅ Current Project Status
 
-- **Engineering Standards**: 10/10 (Skeleton Hardened).
-- **UI/UX**: 8/10 (Premium Layout established, Badge UI refined).
+- **Engineering Standards**: 10/10 (Lyre Engine Hardened).
+- **UI/UX**: 9/10 (Premium Layout + Refined Badge UI).
 - **Scalability**: High (Ready for multi-tenant or complex SaaS logic).

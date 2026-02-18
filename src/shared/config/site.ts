@@ -1,12 +1,11 @@
 export const siteConfig = {
-  name: 'Next.js + A.I agent-native skeleton',
-  description:
-    'A premium, Agent-Native Next.js 16 skeleton designed for high-performance development, architectural clarity, and seamless AI collaboration.',
-  url: 'https://next-ai-skeleton.vercel.app',
-  ogImage: 'https://next-ai-skeleton.vercel.app/og.jpg',
+  name: 'Lyre',
+  description: 'Next.js + AI Architecture stack',
+  url: 'https://lyre.vercel.app',
+  ogImage: 'https://lyre.vercel.app/og.jpg',
   links: {
     twitter: 'https://twitter.com/jenishshrestha',
-    github: 'https://github.com/jenishshrestha/next-ai-skeleton',
+    github: 'https://github.com/jenishshrestha/lyre',
   },
   author: {
     name: 'Jenish Shrestha',

@@ -15,7 +15,7 @@ export const auth = betterAuth({
     enabled: true,
   },
   advanced: {
-    cookiePrefix: 'next-ai-skeleton',
+    cookiePrefix: 'lyre',
   },
   socialProviders: {
     github: {

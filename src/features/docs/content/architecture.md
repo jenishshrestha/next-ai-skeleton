@@ -2,7 +2,7 @@
 title: '🏗️ Architecture: Feature-Driven Design'
 description: 'Deep-dive into the FDD methodology and folder isolation rules.'
 date: '2026-02-13'
-author: 'Next AI Skeleton'
+author: 'Ventus'
 ---
 
 ## Feature-Driven Design (FDD)

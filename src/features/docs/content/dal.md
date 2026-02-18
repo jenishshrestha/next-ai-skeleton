@@ -2,7 +2,7 @@
 title: '🛰️ API Communication (DAL)'
 description: 'How to use the Data Access Layer (DAL) for type-safe, resilient API communication.'
 date: '2026-02-13'
-author: 'Next AI Skeleton'
+author: 'Ventus'
 ---
 
 ## Overview

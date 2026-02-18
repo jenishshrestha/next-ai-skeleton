@@ -17,9 +17,9 @@ export default function Home() {
           </h1>
 
           <p className="text-muted-foreground mx-auto max-w-xl text-sm font-medium sm:text-base">
-            The elite Next.js 16 skeleton for developers who demand{' '}
+            The orchestrated Next.js + AI architecture stack for developers
             <br className="hidden md:block" />
-            architectural purity and AI-native excellence.
+            who demand architectural purity and harmonious excellence.
           </p>
 
           <div className="flex flex-col gap-3 pt-4 sm:flex-row sm:justify-center">
@@ -28,7 +28,7 @@ export default function Home() {
             </Button>
             <Button asChild variant="outline" size="lg" className="rounded-lg px-8 font-bold">
               <a
-                href="https://github.com/jenishshrestha/next-ai-skeleton"
+                href="https://github.com/jenishshrestha/lyre"
                 target="_blank"
                 rel="noopener noreferrer"
               >

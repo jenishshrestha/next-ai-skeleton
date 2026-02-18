@@ -48,7 +48,7 @@ export function Header() {
                 <Link
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="https://github.com/jenishshrestha/next-ai-skeleton"
+                  href="https://github.com/jenishshrestha/next-ai-starter"
                 >
                   <GithubIcon className="h-5 w-5" />
                   <span className="sr-only">GitHub</span>
