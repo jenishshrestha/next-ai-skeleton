@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { LayoutDashboard, Loader2, Settings, UserCircle } from 'lucide-react';
 
 import {
@@ -19,10 +18,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/avatar';
+import { usePathname } from 'next/navigation';
+import { UserInfo } from '@/shared/components/user-info';
+import { LogoutMenuItem } from '@/shared/components/logout-menu-item';
 
 import { authClient } from '@/shared/lib/auth-client';
-import { usePathname, useRouter } from 'next/navigation';
 
 import Link from 'next/link';
 
@@ -42,23 +42,8 @@ const items = [
 import { Logo } from '@/shared/components/logo';
 
 export function AppSidebar() {
-  const router = useRouter();
   const pathname = usePathname();
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const { data: activeSession, isPending } = authClient.useSession();
-  const handleLogout = async () => {
-    setIsLoggingOut(true);
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          router.push('/login');
-        },
-        onError: () => {
-          setIsLoggingOut(false);
-        },
-      },
-    });
-  };
 
   return (
     <Sidebar collapsible="icon">
@@ -98,27 +83,9 @@ export function AppSidebar() {
                       <Loader2 className="text-muted-foreground size-4 animate-spin" />
                     </div>
                   ) : (
-                    <>
-                      <Avatar className="h-8 w-8 rounded-lg">
-                        <AvatarImage
-                          src={activeSession?.user?.image || ''}
-                          alt={activeSession?.user?.name || ''}
-                        />
-                        <AvatarFallback className="rounded-lg">
-                          {activeSession?.user?.name?.slice(0, 2).toUpperCase() || 'JD'}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div className="grid flex-1 text-left text-sm leading-tight">
-                        <span className="truncate font-semibold">{activeSession?.user?.name}</span>
-                        <span className="truncate text-xs">{activeSession?.user?.email}</span>
-                      </div>
-                    </>
+                    <UserInfo user={activeSession?.user || {}} size="sm" className="flex-1" />
                   )}
-                  {isLoggingOut ? (
-                    <Loader2 className="text-muted-foreground ml-auto size-4 animate-spin" />
-                  ) : (
-                    <UserCircle className="ml-auto size-4" />
-                  )}
+                  <UserCircle className="ml-auto size-4" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent
@@ -127,19 +94,11 @@ export function AppSidebar() {
                 align="end"
                 sideOffset={4}
               >
-                <DropdownMenuItem onClick={() => router.push('/settings')} disabled={isLoggingOut}>
+                <DropdownMenuItem onClick={() => (window.location.href = '/settings')}>
                   <Settings className="mr-2 h-4 w-4" />
                   Settings
                 </DropdownMenuItem>
-                <DropdownMenuItem
-                  onSelect={(e) => e.preventDefault()}
-                  onClick={handleLogout}
-                  className="text-red-500 hover:text-red-600 focus:text-red-600"
-                  disabled={isLoggingOut}
-                >
-                  <UserCircle className="mr-2 h-4 w-4" />
-                  {isLoggingOut ? 'Logging out...' : 'Log out'}
-                </DropdownMenuItem>
+                <LogoutMenuItem />
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>

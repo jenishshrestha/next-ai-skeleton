@@ -1,62 +1,41 @@
 'use client';
 
-import { GithubIcon } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { Logo } from '@/shared/components/logo';
-
-import {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  navigationMenuTriggerStyle,
-} from '@/shared/components/ui/navigation-menu';
+import { ThemeToggle } from '@/shared/components/theme-toggle';
+import { UserAccountNav } from '@/shared/components/user-account-nav';
+import { useSession } from '@/shared/lib/auth-client';
 import { Button } from '@/shared/components/ui/button';
-
-const navLinks = [
-  { href: '/login', label: 'Login' },
-  { href: '/docs', label: 'Docs' },
-];
+import { Skeleton } from '@/shared/components/ui/skeleton';
 
 export function Header() {
-  const pathname = usePathname();
+  const { data: session, isPending } = useSession();
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur-md dark:bg-zinc-900/80">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
+    <header className="bg-background/80 sticky top-0 z-50 w-full border-b backdrop-blur-md">
+      <div className="mx-auto flex h-14 max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        {/* Left: Logo */}
         <Logo textClassName="text-xl font-black tracking-tighter" />
 
-        <NavigationMenu>
-          <NavigationMenuList>
-            {navLinks.map(({ href, label }) => (
-              <NavigationMenuItem key={href}>
-                <NavigationMenuLink
-                  asChild
-                  data-active={pathname.startsWith(href) || undefined}
-                  className={navigationMenuTriggerStyle({
-                    className:
-                      'data-[active=true]:bg-accent data-[active=true]:text-accent-foreground data-[active=true]:font-semibold',
-                  })}
-                >
-                  <Link href={href}>{label}</Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            ))}
-            <NavigationMenuItem>
-              <Button asChild variant="ghost" size="icon-sm">
-                <Link
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://github.com/jenishshrestha/next-ai-starter"
-                >
-                  <GithubIcon className="h-5 w-5" />
-                  <span className="sr-only">GitHub</span>
-                </Link>
+        {/* Right: Actions */}
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+
+          {isPending ? (
+            <Skeleton className="h-8 w-8 rounded-full" />
+          ) : session ? (
+            <UserAccountNav />
+          ) : (
+            <div className="flex items-center gap-2">
+              <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+                <Link href="/login">Log in</Link>
               </Button>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
+              <Button asChild size="sm">
+                <Link href="/signup">Sign up</Link>
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

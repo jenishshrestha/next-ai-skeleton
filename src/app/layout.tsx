@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { defaultMetadata } from '@/shared/config/seo';
 import { siteConfig } from '@/shared/config/site';
 import { Toaster } from '@/shared/components/ui/sonner';
+import { ThemeProvider } from '@/shared/components/theme-provider';
 import './globals.css';
 
 const geistSans = Geist({
@@ -31,14 +32,16 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        {children}
-        <Toaster richColors />
+        <ThemeProvider>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+          {children}
+          <Toaster richColors />
+        </ThemeProvider>
       </body>
     </html>
   );
