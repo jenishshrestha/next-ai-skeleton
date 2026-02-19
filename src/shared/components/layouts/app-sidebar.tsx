@@ -1,4 +1,4 @@
-import { LayoutDashboard, Loader2, Settings, UserCircle } from 'lucide-react';
+import { LayoutDashboard, Settings, UserCircle } from 'lucide-react';
 
 import {
   Sidebar,
@@ -21,8 +21,7 @@ import {
 import { usePathname } from 'next/navigation';
 import { UserInfo } from '@/shared/components/user-info';
 import { LogoutMenuItem } from '@/shared/components/logout-menu-item';
-
-import { authClient } from '@/shared/lib/auth-client';
+import { useServerSession } from '@/shared/components/session-provider';
 
 import Link from 'next/link';
 
@@ -43,7 +42,7 @@ import { Logo } from '@/shared/components/logo';
 
 export function AppSidebar() {
   const pathname = usePathname();
-  const { data: activeSession, isPending } = authClient.useSession();
+  const { session: activeSession } = useServerSession();
 
   return (
     <Sidebar collapsible="icon">
@@ -78,13 +77,7 @@ export function AppSidebar() {
                   size="lg"
                   className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
-                  {isPending ? (
-                    <div className="flex w-full items-center justify-center">
-                      <Loader2 className="text-muted-foreground size-4 animate-spin" />
-                    </div>
-                  ) : (
-                    <UserInfo user={activeSession?.user || {}} size="sm" className="flex-1" />
-                  )}
+                  <UserInfo user={activeSession?.user || {}} size="sm" className="flex-1" />
                   <UserCircle className="ml-auto size-4" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>

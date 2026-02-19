@@ -7,7 +7,7 @@ tags: architecture, organization, fdd
 
 ## Feature Co-location
 
-Keep all feature-specific code (components, hooks, styles, tests) inside the feature's directory. Treat every feature as a self-contained "mini-app".
+Keep all feature-specific code (components, hooks, styles, **tests**) inside the feature's directory. Treat every feature as a self-contained "mini-app."
 
 **Incorrect (Scattered files):**
 
@@ -17,20 +17,26 @@ src/
     FeedbackList.tsx
   hooks/
     useFeedback.ts
+  tests/
+    feedback-actions.test.ts   ← don't use a global tests/ folder
   features/
     feedback/
       page.tsx
 ```
 
-**Correct (Co-located):**
+**Correct (Co-located, including tests):**
 
 ```
 src/
   features/
     feedback/
       components/
-        FeedbackList.tsx
+        feedback-list.tsx
       hooks/
-        useFeedback.ts
+        use-feedback.ts
+      actions.ts
+      actions.test.ts          ← test lives next to the code it verifies
       page.tsx
 ```
+
+See also: `server-client-boundary`, `api-boundary`.

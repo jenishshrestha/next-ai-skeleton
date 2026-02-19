@@ -12,29 +12,35 @@ Comprehensive architectural standards for organizing Next.js applications. Conta
 | Priority | Category              | Impact   | Prefix      |
 | -------- | --------------------- | -------- | ----------- |
 | 1        | Feature Locality      | CRITICAL | `locality-` |
-| 2        | Public API            | HIGH     | `api-`      |
-| 3        | Naming & Consistency  | MEDIUM   | `naming-`   |
-| 4        | Shared Infrastructure | MEDIUM   | `shared-`   |
+| 2        | Component Boundaries  | CRITICAL | `server-`   |
+| 3        | Public API            | HIGH     | `api-`      |
+| 4        | Naming & Consistency  | MEDIUM   | `naming-`   |
+| 5        | Shared Infrastructure | MEDIUM   | `shared-`   |
 
 ## Quick Reference
 
 ### 1. Feature Locality (CRITICAL)
 
-- `locality-co-location` - Keep all feature code inside the feature folder.
+- `locality-co-location` - Keep all feature code (including tests) inside the feature folder.
 - `locality-depth` - Limit nesting to 3 levels for predictability.
 
-### 2. Public API (HIGH)
+### 2. Component Boundaries (CRITICAL)
 
-- `api-index-export` - Use index.ts as the sole entry point.
-- `api-leaky-imports` - Never import from feature internals.
+- `server-client-boundary` - Default to Server Components. Push `'use client'` to leaf nodes.
 
-### 3. Naming & Consistency (MEDIUM)
+### 3. Public API (HIGH)
+
+- `api-boundary` - Use `index.ts` as the sole entry point. Never import from feature internals.
+
+### 4. Naming & Consistency (MEDIUM)
 
 - `naming-consistency` - Use kebab-case for all files and folders.
 
-### 4. Shared Infrastructure (MEDIUM)
+### 5. Shared Infrastructure (MEDIUM)
 
 - `shared-global-move` - Promote to shared only after usage in >2 features.
+- `shared-component-organization` - Organize shared components into `ui/`, `layouts/`, `providers/` sub-directories.
+- `hook-extraction` - Extract business logic from components into custom hooks.
 
 ## How to Use
 
@@ -43,8 +49,14 @@ Read individual rule files for detailed explanations and code examples:
 ```
 rules/locality-co-location.md
 rules/locality-depth.md
-rules/api-index-export.md
-rules/api-leaky-imports.md
+rules/server-client-boundary.md
+rules/api-boundary.md
 rules/naming-consistency.md
 rules/shared-global-move.md
+rules/shared-component-organization.md
+rules/hook-extraction.md
 ```
+
+## Full Compiled Document
+
+For the complete guide with all rules expanded: `AGENTS.md`

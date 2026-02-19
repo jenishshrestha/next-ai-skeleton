@@ -4,12 +4,11 @@ import Link from 'next/link';
 import { Logo } from '@/shared/components/logo';
 import { ThemeToggle } from '@/shared/components/theme-toggle';
 import { UserAccountNav } from '@/shared/components/user-account-nav';
-import { useSession } from '@/shared/lib/auth-client';
+import { useServerSession } from '@/shared/components/session-provider';
 import { Button } from '@/shared/components/ui/button';
-import { Skeleton } from '@/shared/components/ui/skeleton';
 
 export function Header() {
-  const { data: session, isPending } = useSession();
+  const { session } = useServerSession();
 
   return (
     <header className="bg-background/80 sticky top-0 z-50 w-full border-b backdrop-blur-md">
@@ -21,9 +20,7 @@ export function Header() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
 
-          {isPending ? (
-            <Skeleton className="h-8 w-8 rounded-full" />
-          ) : session ? (
+          {session ? (
             <UserAccountNav />
           ) : (
             <div className="flex items-center gap-2">

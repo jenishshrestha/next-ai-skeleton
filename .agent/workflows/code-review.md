@@ -15,13 +15,22 @@ Use this workflow when a user asks for a code review of a specific branch or a s
    - Read the file content to understand the full context.
 
 4. **Execute the Review**
-   - Follow the instructions in `.agents/skills/code-review/AGENTS.md`.
-   - Apply rules from `.agents/skills/code-review/rules/`.
-   - Check against `vercel-react-best-practices`.
+   - Follow the instructions in `.agent/skills/code-review/AGENTS.md`.
+   - Apply rules from `.agent/skills/code-review/rules/`.
+   - Check against these skills (read their `SKILL.md` first):
+     - `feature-driven-architecture` — FDD boundaries, co-location, public API.
+     - `vercel-react-best-practices` — waterfalls, bundle size, server vs client.
+     - `composition-patterns` — component design, prop sprawl, compound patterns.
+     - `testing-standards` — test quality if tests are included in the diff.
 
 5. **Generate the Report**
    - Use the "Actionable Mentorship" format.
    - Include line numbers and code snippets.
+   - Classify each finding with a severity:
+     - 🔴 **CRITICAL** — Must fix before merge (security, correctness, data loss).
+     - 🟡 **WARNING** — Should fix (performance, architecture, DRY violations).
+     - 🟢 **SUGGESTION** — Nice to have (readability, naming, style improvements).
+   - Skip findings handled by tooling (ESLint, Prettier, import ordering).
 
 6. **Present to User**
    - Create a `code_review.md` artifact in the current brain directory (using the `write_to_file` tool).

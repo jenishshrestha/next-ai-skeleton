@@ -1,23 +1,58 @@
 # AI Agent: Testing Instructions
 
-When writing or refactoring unit tests, you MUST adhere to these strict technical constraints.
+When writing or refactoring unit tests, follow this workflow in order.
 
-## 1. Zero-Tolerance for `any`
+## Step 1: Understand the Source
 
-- You are strictly prohibited from using the `any` keyword in test files.
-- If you encounter existing `any` usage, your first task is to refactor it to use proper types or `unknown`.
+Before writing a test, study the source file:
 
-## 2. Type Discovery
-
-- Before writing a test, search for existing type definitions in the feature's `types/` folder or `src/shared/types/`.
+- Read the function/component's type signature and return type.
+- Search for existing type definitions in the feature's `types/` folder or `src/shared/types/`.
 - Use `import type` for type-only imports to keep the runtime lean.
 
-## 3. Mocking Standards
+## Step 2: Scaffold the Test
 
-- Use `bun:test`'s `mock.module` for service/utility mocking.
-- Ensure the mock's parameters match the real function's signature exactly.
+- Co-locate the test file next to the source: `actions.ts` → `actions.test.ts`.
+- Use `bun:test` exclusively. Do not use Jest, Vitest, or other frameworks.
+- Write descriptive `describe` and `it` blocks that read like documentation.
 
-## 4. Assertion Clarity
+```typescript
+import { describe, expect, it, mock } from 'bun:test';
+```
 
-- Use descriptive `describe` and `it` blocks.
+## Step 3: Type-Safe Mocking
+
+- Use `mock.module` for infrastructure/external modules.
+- Use `mock()` for function-level dependencies.
+- Ensure the mock's parameters match the real function's signature **exactly**.
+- **Never** use `any` in mock signatures. Use the real type or `unknown` with a type guard.
+
+```typescript
+import type { Config } from './types';
+
+const myMock = mock((arg: Config) => 'value');
+
+mock.module('./api', () => ({
+  fetchData: myMock,
+}));
+```
+
+## Step 4: Cover Edge Cases
+
+Every test suite should cover at minimum:
+
+- ✅ **Happy path** — expected input produces expected output.
+- ❌ **Error path** — what happens when the API returns an error, throws, or times out?
+- 🫙 **Empty state** — what happens with `null`, `undefined`, `[]`, or `{}`?
+- ⏳ **Loading state** — if the function is async, test the pending state.
+
+## Step 5: Assert Clearly
+
 - Prefer `toEqual` for object comparisons and `toBe` for primitives.
+- Avoid generic `toBeTruthy()` — be specific about what you expect.
+- If a function should throw, use `toThrow()` with the expected message.
+
+## Zero-Tolerance Policy
+
+- You are **strictly prohibited** from using the `any` keyword in test files.
+- If you encounter existing `any` usage, your **first task** is to refactor it to use proper types or `unknown`.

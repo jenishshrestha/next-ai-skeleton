@@ -1,4 +1,4 @@
-import { useSession } from '@/shared/lib/auth-client';
+import { useServerSession } from '@/shared/components/session-provider';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,9 +9,10 @@ import {
 import { Button } from '@/shared/components/ui/button';
 import { UserInfo } from '@/shared/components/user-info';
 import { LogoutMenuItem } from '@/shared/components/logout-menu-item';
+import Link from 'next/link';
 
 export function UserAccountNav() {
-  const { data: session } = useSession();
+  const { session } = useServerSession();
 
   if (!session) return null;
 
@@ -33,12 +34,12 @@ export function UserAccountNav() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem onClick={() => (window.location.href = '/dashboard')}>
-          Dashboard
+        <DropdownMenuItem>
+          <Link href="/dashboard">Dashboard</Link>
         </DropdownMenuItem>
 
-        <DropdownMenuItem onClick={() => (window.location.href = '/settings')}>
-          Settings
+        <DropdownMenuItem>
+          <Link href="/settings">Settings</Link>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />

@@ -1,8 +1,11 @@
 import { Geist, Geist_Mono } from 'next/font/google';
+import { headers } from 'next/headers';
 import { defaultMetadata } from '@/shared/config/seo';
 import { siteConfig } from '@/shared/config/site';
 import { Toaster } from '@/shared/components/ui/sonner';
 import { ThemeProvider } from '@/shared/components/theme-provider';
+import { SessionProvider } from '@/shared/components/session-provider';
+import { auth } from '@/shared/lib/auth';
 import './globals.css';
 
 const geistSans = Geist({
@@ -17,11 +20,15 @@ const geistMono = Geist_Mono({
 
 export const metadata = defaultMetadata;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -35,12 +42,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}>
         <ThemeProvider>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          />
-          {children}
-          <Toaster richColors />
+          <SessionProvider session={session}>
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+            {children}
+            <Toaster richColors />
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>

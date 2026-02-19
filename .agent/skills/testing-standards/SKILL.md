@@ -9,12 +9,12 @@ Global standards for writing high-performance, type-safe unit tests using Bun. E
 
 ## Rule Categories by Priority
 
-| Priority | Category       | Impact   | Prefix     |
-| -------- | -------------- | -------- | ---------- |
-| 1        | Strict Typing  | CRITICAL | `strict-`  |
-| 2        | Infrastructure | HIGH     | `bun-`     |
-| 3        | Decoupling     | HIGH     | `mock-`    |
-| 4        | Organization   | MEDIUM   | `feature-` |
+| Priority | Category       | Impact   | Prefix      |
+| -------- | -------------- | -------- | ----------- |
+| 1        | Strict Typing  | CRITICAL | `strict-`   |
+| 2        | Infrastructure | HIGH     | `bun-`      |
+| 3        | Decoupling     | HIGH     | `mock-`     |
+| 4        | Coverage       | MEDIUM   | `coverage-` |
 
 ## Quick Reference
 
@@ -30,9 +30,9 @@ Global standards for writing high-performance, type-safe unit tests using Bun. E
 
 - `mocking-strategy` - Use mock.module and mock() for isolation.
 
-### 4. Organization (MEDIUM)
+### 4. Coverage (MEDIUM)
 
-- `feature-locality` - Co-locate tests with the features they verify.
+- `edge-case-coverage` - Cover happy path, error path, empty state, and loading state.
 
 ## How to Use
 
@@ -42,5 +42,9 @@ Read individual rule files for detailed explanations and code examples:
 rules/strict-typing.md
 rules/bun-test-native.md
 rules/mocking-strategy.md
-rules/feature-locality.md
+rules/edge-case-coverage.md
 ```
+
+## Full Compiled Document
+
+For the complete guide with all rules expanded: `AGENTS.md`

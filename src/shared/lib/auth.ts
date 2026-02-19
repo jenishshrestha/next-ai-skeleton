@@ -11,6 +11,12 @@ export const auth = betterAuth({
     schema: schema,
   }),
   baseURL: env.BETTER_AUTH_URL,
+  session: {
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60, // Cache duration in seconds (5 minutes)
+    },
+  },
   emailAndPassword: {
     enabled: true,
   },
