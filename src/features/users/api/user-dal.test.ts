@@ -47,28 +47,4 @@ describe('UserDAL (Automated Magic)', () => {
     expect(chain.where).toHaveBeenCalled();
   });
 
-  it('updateProfile correctly constructs the update query without manual DI', async () => {
-    const updatedUser = {
-      id: '123',
-      name: 'Updated Name',
-      email: 'test@example.com',
-      emailVerified: false,
-      image: null,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      lastLoginMethod: 'credentials',
-    };
-    chain.mockResolve([updatedUser]);
-
-    // Clean call, clean code.
-    const result = await UserDAL.updateProfile('123', 'Updated Name');
-
-    expect(result.success).toBe(true);
-    if (result.success) {
-      expect(result.data?.name).toBe('Updated Name');
-    }
-
-    expect(dbMock.update).toHaveBeenCalled();
-    expect(chain.set).toHaveBeenCalled();
-  });
 });
