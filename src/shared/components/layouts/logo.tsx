@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { cn } from '@/shared/lib/utils';
+import { SvgIcon } from '@/shared/components/ui/svg-icon';
 import LyreLogo from '@/shared/assets/icons/lyre-logo.svg';
 
 interface LogoProps {
@@ -15,7 +16,7 @@ export function Logo({ className, iconClassName, textClassName, href = '/' }: Lo
       href={href}
       className={cn('flex items-center gap-2 font-semibold tracking-tight', className)}
     >
-      <LyreLogo className={cn('h-6 w-6 shrink-0', iconClassName)} />
+      <SvgIcon icon={LyreLogo} className={cn('h-6 w-6 text-white', iconClassName)} />
       <span className={cn('truncate group-data-[state=collapsed]:hidden', textClassName)}>
         Lyre
       </span>
