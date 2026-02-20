@@ -17,15 +17,11 @@ export default function Icon() {
     // ImageResponse JSX element
     <div
       style={{
-        fontSize: 24,
-        background: '#09090b', // Zinc-950
         width: '100%',
         height: '100%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        color: '#ffffff',
-        borderRadius: '20%',
       }}
     >
       <svg width="24" height="24" viewBox="0 0 512 512" fill="currentColor">
