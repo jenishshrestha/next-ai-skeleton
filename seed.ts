@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
-import { db } from '../db';
-import { user, account } from '../db-schema';
+import { db } from '@/shared/lib/db';
+import { user, account } from '@/shared/lib/db-schema';
 
 import { hashPassword } from 'better-auth/crypto';
 

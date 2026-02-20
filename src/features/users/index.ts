@@ -1,2 +1,1 @@
-export * from './components/settings-form';
-export * from './components/change-password-form';
+export { UsersListing } from './components/users-listing';

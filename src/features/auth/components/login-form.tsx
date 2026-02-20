@@ -7,14 +7,14 @@ import { Turnstile } from '@marsidev/react-turnstile';
 import { Button } from '@/shared/components/ui/button';
 import { Badge } from '@/shared/components/ui/badge';
 import { Input } from '@/shared/components/ui/input';
-import { PasswordInput } from '@/shared/components/ui/password-input';
+import { PasswordInput } from '@/shared/components/form/password-input';
 import {
   Field,
   FieldControl,
   FieldLabel,
   FieldError,
   FieldGroup,
-} from '@/shared/components/ui/field';
+} from '@/shared/components/form/field';
 import { Form } from '@/shared/components/form/form';
 
 import { useLogin } from '../hooks/use-login';

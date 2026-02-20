@@ -1,5 +1,4 @@
-import { SettingsForm, ChangePasswordForm } from '@/features/users';
-import { SettingsStats } from '@/features/users/components/settings-stats';
+import { SettingsForm, ChangePasswordForm, SettingsStats } from '@/features/settings';
 import { Separator } from '@/shared/components/ui/separator';
 import { getServerSession } from '@/shared/lib/dal/session';
 import { PageHeader } from '@/shared/components/layouts/page-header';

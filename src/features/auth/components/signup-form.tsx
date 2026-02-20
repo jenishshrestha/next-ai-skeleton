@@ -8,7 +8,7 @@ import * as z from 'zod';
 import { authClient } from '@/shared/lib/auth-client';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
-import { PasswordInput } from '@/shared/components/ui/password-input';
+import { PasswordInput } from '@/shared/components/form/password-input';
 import { Turnstile } from '@marsidev/react-turnstile';
 import {
   Field,
@@ -16,7 +16,7 @@ import {
   FieldLabel,
   FieldError,
   FieldGroup,
-} from '@/shared/components/ui/field';
+} from '@/shared/components/form/field';
 
 const signupSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),

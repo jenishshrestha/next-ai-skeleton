@@ -4,7 +4,7 @@ import { dbAction } from '@/dal';
 import { eq } from 'drizzle-orm';
 import { auth } from '@/shared/lib/auth';
 import { headers } from 'next/headers';
-import { type ChangePasswordFormValues } from '../types/settings-schemas';
+
 
 /**
  * User Data Access Layer
@@ -25,38 +25,15 @@ export const UserDAL = {
     ),
 
   /**
-   * Update user profile
-   * Utilizes dbAction for consistent error handling and revalidation.
+   * Fetch all users
    */
-  updateProfile: (id: string, name: string) =>
+  getAll: () =>
     dbAction(
       async () => {
-        const [updated] = await db
-          .update(user)
-          .set({ name, updatedAt: new Date() })
-          .where(eq(user.id, id))
-          .returning();
-        return updated;
+        const results = await db.select().from(user);
+        return results;
       },
-      { revalidate: '/settings', errorMessage: 'Failed to update user profile in database' },
+      { errorMessage: 'Failed to fetch all users' },
     ),
 
-  /**
-   * Change user password
-   * Wraps Better Auth API in dbAction for consistent error handling and session context.
-   */
-  changePassword: (data: ChangePasswordFormValues) =>
-    dbAction(
-      async () => {
-        const response = await auth.api.changePassword({
-          headers: await headers(),
-          body: {
-            currentPassword: data.currentPassword,
-            newPassword: data.newPassword,
-          },
-        });
-        return response;
-      },
-      { errorMessage: 'Failed to change password' },
-    ),
 };

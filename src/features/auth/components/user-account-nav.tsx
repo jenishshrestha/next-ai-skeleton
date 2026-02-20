@@ -1,4 +1,4 @@
-import { useServerSession } from '@/shared/components/session-provider';
+import { useServerSession } from '@/shared/providers/session-provider';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,8 +7,8 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu';
 import { Button } from '@/shared/components/ui/button';
-import { UserInfo } from '@/shared/components/user-info';
-import { LogoutMenuItem } from '@/shared/components/logout-menu-item';
+import { UserInfo } from './user-info';
+import { LogoutMenuItem } from './logout-menu-item';
 import Link from 'next/link';
 
 export function UserAccountNav() {

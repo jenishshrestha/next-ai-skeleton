@@ -16,7 +16,7 @@ import {
   FieldDescription,
   FieldError,
   FieldLabel,
-} from '@/shared/components/ui/field';
+} from '@/shared/components/form/field';
 
 /**
  * Modern Form Composition Wrapper

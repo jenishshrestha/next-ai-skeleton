@@ -1,11 +1,14 @@
 'use client';
 
-import * as React from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+  type ReactNode,
+} from 'react';
 
-/**
- * Session data shape from Better Auth.
- * Matches the structure returned by `auth.api.getSession()`.
- */
 interface SessionUser {
   id: string;
   name: string;
@@ -35,43 +38,47 @@ export interface SessionData {
 interface SessionContextValue {
   session: SessionData | null;
   isPending: boolean;
+  updateSession: (data: Partial<SessionUser>) => void;
 }
 
-const SessionContext = React.createContext<SessionContextValue>({
+const SessionContext = createContext<SessionContextValue>({
   session: null,
   isPending: true,
+  updateSession: () => {},
 });
 
-/**
- * SessionProvider
- *
- * Wraps the application in a server-hydrated session context.
- * The session is fetched once on the server (in RootLayout) and passed down,
- * eliminating client-side refetches and loading flickers.
- */
 export function SessionProvider({
   children,
-  session,
+  session: initialSession,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   session: SessionData | null;
 }) {
-  const value = React.useMemo(() => ({ session, isPending: false }), [session]);
+  const [session, setSession] = useState<SessionData | null>(initialSession);
+
+  const updateSession = useCallback((data: Partial<SessionUser>) => {
+    setSession((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        user: { ...prev.user, ...data },
+      };
+    });
+  }, []);
+
+  const value = useMemo(
+    () => ({ session, isPending: false, updateSession }),
+    [session, updateSession],
+  );
 
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
 }
 
-/**
- * useServerSession
- *
- * Returns the server-hydrated session from the context.
- * Use this instead of `useSession` from `auth-client` when you want
- * the instant, zero-fetch session data.
- */
 export function useServerSession() {
-  const context = React.useContext(SessionContext);
+  const context = useContext(SessionContext);
   if (context === undefined) {
     throw new Error('useServerSession must be used within a SessionProvider');
   }
   return context;
 }
+

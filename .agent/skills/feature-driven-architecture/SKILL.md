@@ -35,10 +35,11 @@ Comprehensive architectural standards for organizing Next.js applications. Conta
 ### 4. Naming & Consistency (MEDIUM)
 
 - `naming-consistency` - Use kebab-case for all files and folders.
+- `named-imports` - Use named imports, never `import * as`. Use `import type` for types.
 
 ### 5. Shared Infrastructure (MEDIUM)
 
-- `shared-global-move` - Promote to shared only after usage in >2 features.
+- `shared-global-move` - Promote to shared only after usage in 3+ features.
 - `shared-component-organization` - Organize shared components into `ui/`, `layouts/`, `providers/` sub-directories.
 - `hook-extraction` - Extract business logic from components into custom hooks.
 
@@ -52,6 +53,7 @@ rules/locality-depth.md
 rules/server-client-boundary.md
 rules/api-boundary.md
 rules/naming-consistency.md
+rules/named-imports.md
 rules/shared-global-move.md
 rules/shared-component-organization.md
 rules/hook-extraction.md

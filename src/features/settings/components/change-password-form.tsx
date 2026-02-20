@@ -6,12 +6,12 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { Button } from '@/shared/components/ui/button';
-import { FieldGroup } from '@/shared/components/ui/field';
-import { PasswordInput } from '@/shared/components/ui/password-input';
+import { FieldGroup } from '@/shared/components/form/field';
+import { PasswordInput } from '@/shared/components/form/password-input';
 
 import { Form } from '@/shared/components/form/form';
 import { changePasswordAction } from '../api/actions';
-import { changePasswordSchema, type ChangePasswordFormValues } from '../types/settings-schemas';
+import { changePasswordSchema, type ChangePasswordFormValues } from '../types/schemas';
 
 export function ChangePasswordForm() {
   const form = useForm<ChangePasswordFormValues>({

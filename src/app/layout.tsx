@@ -3,8 +3,9 @@ import { headers } from 'next/headers';
 import { defaultMetadata } from '@/shared/config/seo';
 import { siteConfig } from '@/shared/config/site';
 import { Toaster } from '@/shared/components/ui/sonner';
-import { ThemeProvider } from '@/shared/components/theme-provider';
-import { SessionProvider } from '@/shared/components/session-provider';
+import { ThemeProvider } from '@/shared/providers/theme-provider';
+import { SessionProvider } from '@/shared/providers/session-provider';
+import { QueryProvider } from '@/shared/providers/query-provider';
 import { auth } from '@/shared/lib/auth';
 import './globals.css';
 
@@ -42,14 +43,16 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}>
         <ThemeProvider>
-          <SessionProvider session={session}>
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
-            {children}
-            <Toaster richColors />
-          </SessionProvider>
+          <QueryProvider>
+            <SessionProvider session={session}>
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+              />
+              {children}
+              <Toaster richColors />
+            </SessionProvider>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -13,7 +13,7 @@ import {
   FieldLabel,
   FieldError,
   FieldGroup,
-} from '@/shared/components/ui/field';
+} from '@/shared/components/form/field';
 
 export function ForgotPasswordForm() {
   const [isSuccess, setIsSuccess] = useState(false);

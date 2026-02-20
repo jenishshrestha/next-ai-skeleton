@@ -1,4 +1,11 @@
-import { LayoutDashboard, Settings, UserCircle } from 'lucide-react';
+import {
+  Building2,
+  LayoutDashboard,
+  Settings,
+  ChevronsUpDown,
+  Users,
+  UserCircle
+} from 'lucide-react';
 
 import {
   Sidebar,
@@ -19,17 +26,21 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu';
 import { usePathname } from 'next/navigation';
-import { UserInfo } from '@/shared/components/user-info';
-import { LogoutMenuItem } from '@/shared/components/logout-menu-item';
-import { useServerSession } from '@/shared/components/session-provider';
+import { UserInfo, LogoutMenuItem } from '@/features/auth';
+import { useServerSession } from '@/shared/providers/session-provider';
 
 import Link from 'next/link';
 
-const items = [
+const mainNav = [
   {
     title: 'Dashboard',
     url: '/dashboard',
     icon: LayoutDashboard,
+  },
+  {
+    title: 'Users',
+    url: '/users',
+    icon: Users,
   },
   {
     title: 'Settings',
@@ -38,7 +49,7 @@ const items = [
   },
 ];
 
-import { Logo } from '@/shared/components/logo';
+import { Logo } from './logo';
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -54,7 +65,7 @@ export function AppSidebar() {
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {mainNav.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild tooltip={item.title} isActive={pathname === item.url}>
                     <Link href={item.url}>

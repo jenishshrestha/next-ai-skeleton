@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { Logo } from '@/shared/components/logo';
-import { ThemeToggle } from '@/shared/components/theme-toggle';
-import { UserAccountNav } from '@/shared/components/user-account-nav';
-import { useServerSession } from '@/shared/components/session-provider';
+import { Logo } from './logo';
+import { ThemeToggle } from './theme-toggle';
+import { UserAccountNav } from '@/features/auth';
+import { useServerSession } from '@/shared/providers/session-provider';
 import { Button } from '@/shared/components/ui/button';
 
 export function Header() {

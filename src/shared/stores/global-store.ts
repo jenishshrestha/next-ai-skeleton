@@ -1,17 +1,15 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 
 interface UIStoreState {
-  isSidebarOpen?: boolean;
+  viewMode: 'grid' | 'list';
+  setViewMode: (viewMode: 'grid' | 'list') => void;
+  toggleViewMode: () => void;
 }
 
-export const useUIStore = create<UIStoreState>()(
-  persist(
-    () => ({
-      // Initial state
-    }),
-    {
-      name: 'lyre-ui-preferences',
-    },
-  ),
-);
+export const useUIStore = create<UIStoreState>((set) => ({
+  viewMode: 'grid',
+  setViewMode: (viewMode) => set({ viewMode }),
+  toggleViewMode: () => set((state) => ({ 
+    viewMode: state.viewMode === 'grid' ? 'list' : 'grid' 
+  })),
+}));

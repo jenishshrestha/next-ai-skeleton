@@ -13,20 +13,21 @@ import {
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from '@/shared/components/ui/field';
+} from '@/shared/components/form/field';
 import { Input } from '@/shared/components/ui/input';
 import { Form } from '@/shared/components/form/form';
 import { authClient } from '@/shared/lib/auth-client';
+import { useServerSession } from '@/shared/providers/session-provider';
 import { getInitials } from '@/shared/lib/utils';
 
 import {
   profileSchema,
   type ProfileFormValues,
   type SettingsFormProps,
-} from '../types/settings-schemas';
+} from '../types/schemas';
 
 export function SettingsForm({ initialSession }: SettingsFormProps) {
-  const { data: session } = authClient.useSession();
+  const { session, updateSession } = useServerSession();
   const currentSession = session || initialSession;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -42,6 +43,7 @@ export function SettingsForm({ initialSession }: SettingsFormProps) {
     setIsSubmitting(true);
     try {
       await authClient.updateUser({ name: data.name });
+      updateSession({ name: data.name });
       form.reset({ name: data.name });
       toast.success('Profile updated successfully');
     } catch {
