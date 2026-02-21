@@ -7,7 +7,13 @@ import { DataTable } from '@/shared/components/data-table/data-table';
 import { userColumns } from './user-columns';
 import { Button } from '@/shared/components/ui/button';
 import { LayoutGrid, List } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/shared/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/shared/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/components/ui/avatar';
 import { Badge } from '@/shared/components/ui/badge';
 import { getInitials } from '@/shared/lib/utils';
@@ -15,30 +21,25 @@ import { Skeleton } from '@/shared/components/ui/skeleton';
 
 export function UsersListing() {
   const { data: users, isLoading, error } = useUsers();
-  
+
   // Zustand State
   const viewMode = useUIStore((state) => state.viewMode);
   const toggleViewMode = useUIStore((state) => state.toggleViewMode);
 
   if (error) {
-    return <div className="p-4 text-destructive">Failed to load users</div>;
+    return <div className="text-destructive p-4">Failed to load users</div>;
   }
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto p-6">
+    <div className="space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Users</h1>
           <p className="text-muted-foreground">Manage platform users and their roles.</p>
         </div>
-        
+
         {/* Toggle Button using Zustand */}
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={toggleViewMode}
-          className="gap-2"
-        >
+        <Button variant="outline" size="sm" onClick={toggleViewMode} className="gap-2">
           {viewMode === 'grid' ? (
             <>
               <List className="h-4 w-4" />
@@ -61,23 +62,22 @@ export function UsersListing() {
         </div>
       ) : viewMode === 'list' ? (
         // TanStack Table Integration
-        <DataTable
-          columns={userColumns}
-          data={users || []}
-          filterKey="name"
-        />
+        <DataTable columns={userColumns} data={users || []} filterKey="name" />
       ) : (
         // Grid View Integration
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {users?.map((user) => (
-            <Card key={user.id} className="group hover:border-primary/50 transition-colors flex flex-col justify-between">
+            <Card
+              key={user.id}
+              className="group hover:border-primary/50 flex flex-col justify-between transition-colors"
+            >
               <CardHeader className="flex flex-row items-center gap-4 space-y-0">
-                <Avatar className="h-12 w-12 border-2 border-background shadow-sm bg-muted">
+                <Avatar className="border-background bg-muted h-12 w-12 border-2 shadow-sm">
                   {user.image && <AvatarImage src={user.image} alt={user.name} />}
                   <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col overflow-hidden">
-                  <CardTitle className="text-base truncate">{user.name}</CardTitle>
+                  <CardTitle className="truncate text-base">{user.name}</CardTitle>
                   <CardDescription className="truncate">{user.email}</CardDescription>
                 </div>
               </CardHeader>
@@ -85,7 +85,7 @@ export function UsersListing() {
                 <Badge variant={user.emailVerified ? 'default' : 'secondary'}>
                   {user.emailVerified ? 'Verified' : 'Unverified'}
                 </Badge>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-muted-foreground text-sm">
                   Joined {new Date(user.createdAt).toLocaleDateString()}
                 </div>
               </CardContent>

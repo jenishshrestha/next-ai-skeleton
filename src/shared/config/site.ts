@@ -1,11 +1,11 @@
 export const siteConfig = {
-  name: 'Lyre',
+  name: 'BuildNext',
   description: 'Next.js + AI Architecture stack',
-  url: 'https://lyre.vercel.app',
-  ogImage: 'https://lyre.vercel.app/og.jpg',
+  url: 'https://buildnext.vercel.app',
+  ogImage: 'https://buildnext.vercel.app/og.jpg',
   links: {
     twitter: 'https://twitter.com/jenishshrestha',
-    github: 'https://github.com/jenishshrestha/lyre',
+    github: 'https://github.com/jenishshrestha/buildnext',
   },
   author: {
     name: 'Jenish Shrestha',

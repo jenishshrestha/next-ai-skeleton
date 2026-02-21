@@ -18,7 +18,7 @@ export function Logo({ className, iconClassName, textClassName, href = '/' }: Lo
     >
       <SvgIcon icon={LyreLogo} className={cn('h-6 w-6 text-white', iconClassName)} />
       <span className={cn('truncate group-data-[state=collapsed]:hidden', textClassName)}>
-        Lyre
+        BuildNext
       </span>
     </Link>
   );

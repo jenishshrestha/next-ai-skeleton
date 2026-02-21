@@ -28,7 +28,7 @@ export default function Home() {
             </Button>
             <Button asChild variant="outline" size="lg" className="rounded-lg px-8 font-bold">
               <a
-                href="https://github.com/jenishshrestha/lyre"
+                href="https://github.com/jenishshrestha/buildnext"
                 target="_blank"
                 rel="noopener noreferrer"
               >

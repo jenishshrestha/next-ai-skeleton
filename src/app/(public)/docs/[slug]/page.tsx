@@ -1,119 +1,65 @@
 import { notFound } from 'next/navigation';
-import { getDocBySlug, getAllDocs } from '@/features/docs/api/get-doc';
-import { Metadata } from 'next';
+import { CMSDAL } from '@/features/cms/api/cms-dal';
+import { ContentRenderer } from '@/features/cms/components/content-renderer';
+import { constructMetadata } from '@/shared/lib/metadata';
+import { JsonLd } from '@/shared/components/seo/json-ld';
+import { format } from 'date-fns';
+import Link from 'next/link';
+import { ChevronLeft } from 'lucide-react';
 
-import { siteConfig } from '@/shared/config/site';
-
-interface PageProps {
-  params: Promise<{ slug: string }>;
+interface DocPageProps {
+  params: Promise<{
+    slug: string;
+  }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: DocPageProps) {
   const { slug } = await params;
-  const doc = await getDocBySlug(slug);
+  const doc = await CMSDAL.getDocBySlug(slug);
 
-  if (!doc) {
-    return {
-      title: 'Not Found',
-      description: 'The page you are looking for does not exist.',
-    };
-  }
+  if (!doc) return {};
 
-  const ogUrl = `${siteConfig.url}/docs/${slug}`;
-
-  return {
-    title: doc.title,
-    description: doc.description,
-    openGraph: {
-      title: doc.title,
-      description: doc.description,
-      type: 'article',
-      url: ogUrl,
-      images: [
-        {
-          url: siteConfig.ogImage,
-          width: 1200,
-          height: 630,
-          alt: doc.title,
-        },
-      ],
-      authors: [doc.author],
-      publishedTime: doc.date,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: doc.title,
-      description: doc.description,
-      images: [siteConfig.ogImage],
-    },
-    alternates: {
-      canonical: ogUrl,
-    },
-  };
+  return constructMetadata({
+    title: doc.metadata.title,
+    description: doc.metadata.description,
+  });
 }
 
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeHighlight from 'rehype-highlight';
-
-export default async function DocDetailPage({ params }: PageProps) {
+export default async function DocPage({ params }: DocPageProps) {
   const { slug } = await params;
-  const doc = await getDocBySlug(slug);
+  const doc = await CMSDAL.getDocBySlug(slug);
 
-  if (!doc) {
-    notFound();
-  }
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: doc.title,
-    description: doc.description,
-    author: {
-      '@type': 'Person',
-      name: doc.author,
-    },
-    datePublished: doc.date,
-    image: siteConfig.ogImage,
-    url: `${siteConfig.url}/docs/${slug}`,
-  };
+  if (!doc) notFound();
 
   return (
-    <article className="animate-in fade-in slide-in-from-bottom-4 space-y-8 duration-500">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <header className="space-y-4">
-        <div className="text-muted-foreground flex items-center gap-2 text-sm">
-          <time dateTime={doc.date}>
-            {new Date(doc.date).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </time>
-          <span>•</span>
-          <span>{doc.author}</span>
-        </div>
-        <h1 className="text-4xl leading-tight font-extrabold tracking-tighter md:text-5xl">
-          {doc.title}
-        </h1>
-        <p className="text-muted-foreground text-xl leading-relaxed italic">{doc.description}</p>
-      </header>
+    <div className="container mx-auto max-w-4xl px-4 py-12">
+      <JsonLd />
 
-      <div className="prose prose-zinc dark:prose-invert max-w-none">
-        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
-          {doc.content}
-        </ReactMarkdown>
+      <Link
+        href="/docs"
+        className="text-muted-foreground hover:text-primary mb-8 inline-flex items-center text-sm font-medium transition-colors"
+      >
+        <ChevronLeft className="mr-1 h-4 w-4" />
+        Back to Handbook
+      </Link>
+
+      <div className="mb-12 space-y-4">
+        <div className="text-primary flex items-center gap-2 text-sm font-bold tracking-wider uppercase">
+          {doc.metadata.category}
+        </div>
+        <h1 className="text-4xl font-black tracking-tighter md:text-5xl">{doc.metadata.title}</h1>
+        <p className="text-muted-foreground text-xl leading-relaxed">{doc.metadata.description}</p>
+        <div className="text-muted-foreground pt-4 text-sm">
+          Last updated: {format(new Date(doc.metadata.publishedAt), 'MMMM dd, yyyy')}
+        </div>
       </div>
-    </article>
+
+      <ContentRenderer content={doc.content} />
+    </div>
   );
 }
 
 export async function generateStaticParams() {
-  const docs = await getAllDocs();
-  return docs.map((doc) => ({
-    slug: doc.slug,
-  }));
+  const slugs = await CMSDAL.getAllSlugs();
+  return slugs.map((slug) => ({ slug }));
 }

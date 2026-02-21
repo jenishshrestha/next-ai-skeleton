@@ -11,6 +11,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/shared/components/ui/breadcrumb';
+import { ThemeToggle } from './theme-toggle';
 
 export function AppLayout({
   children,
@@ -37,6 +38,9 @@ export function AppLayout({
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
+          <div className="ml-auto flex items-center gap-2">
+            <ThemeToggle />
+          </div>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4">{children}</main>
       </SidebarInset>
